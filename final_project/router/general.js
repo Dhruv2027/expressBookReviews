@@ -29,17 +29,6 @@ public_users.get('/', async function (req, res) {
     }
 });
 
-public_users.get('/', async function (req, res) {
-  try {
-    const data = await new Promise((resolve, reject) => {
-      resolve(JSON.stringify(books))
-    })
-    return res.status(200).json({ data })
-  } catch (error) {
-    return res.status(400).json({ message: error })
-  }
-})
-
 public_users.get('/isbn/:isbn', function (req, res) {
   new Promise((resolve, reject) => {
     const isbn = req.params.isbn
