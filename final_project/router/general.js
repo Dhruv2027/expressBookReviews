@@ -21,13 +21,21 @@ public_users.post("/register", (req, res) => {
 });
 
 public_users.get('/', async function (req, res) {
-    try {
-        const response = await axios.get('https://dhruvviveksh-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/books');
-        return res.json(response.data);
-    } catch (error) {
-        return res.status(500).json({ message: "Error fetching book list" });
-    }
+    const novels = () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(books);
+            }, 1000); // Fixed the placement of parentheses and comma
+        });
+    };
+
+    novels().then((books) => {
+        res.json(books);
+    }).catch((err) => {
+        res.status(500).json({ error: "error" });
+    });
 });
+
 
 public_users.get('/isbn/:isbn', function (req, res) {
   new Promise((resolve, reject) => {
